@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker Data Aggregator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .upload-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .upload-box {
+            border: 2px dashed #667eea;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .upload-box:hover {
+            border-color: #764ba2;
+            background: rgba(118, 75, 162, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .upload-box h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .file-input {
+            margin: 15px 0;
+        }
+        
+        .file-input input[type="file"] {
+            display: none;
+        }
+        
+        .file-label {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .file-label:hover {
+            transform: scale(1.05);
+        }
+        
+        .process-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 15px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .process-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+        
+        .process-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .results-section {
+            display: none;
+            margin-top: 40px;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 5px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+        
+        .tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            min-height: 300px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .user-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        
+        .user-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .user-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .daily-top-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .top-user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .date {
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .steps-badge {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #17a2b8, #138496);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: transform 0.2s;
+        }
+        
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏃‍♂️ Fitness Tracker Data Aggregator</h1>
+            <p>Upload your fitness data files (CSV & JSON) and get comprehensive analytics</p>
+        </div>
+        
+        <div class="upload-section">
+            <div class="upload-box">
+                <h3>📊 CSV Data File</h3>
+                <p>Upload your CSV fitness data</p>
+                <div class="file-input">
+                    <label for="csvFile" class="file-label">Choose CSV File</label>
+                    <input type="file" id="csvFile" accept=".csv" />
+                </div>
+                <div id="csvStatus"></div>
+            </div>
+            
+            <div class="upload-box">
+                <h3>📋 JSON Data File</h3>
+                <p>Upload your JSON fitness data</p>
+                <div class="file-input">
+                    <label for="jsonFile" class="file-label">Choose JSON File</label>
+                    <input type="file" id="jsonFile" accept=".json" />
+                </div>
+                <div id="jsonStatus"></div>
+            </div>
+        </div>
+        
+        <button id="processBtn" class="process-btn" disabled>🚀 Process Data</button>
+        
+        <div id="loadingSection" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Processing your fitness data...</p>
+        </div>
+        
+        <div id="resultsSection" class="results-section">
+            <div class="tabs">
+                <div class="tab active" data-tab="user-stats">👥 User Statistics</div>
+                <div class="tab" data-tab="daily-tops">🏆 Daily Top Users</div>
+                <div class="tab" data-tab="summary">📈 Summary</div>
+            </div>
+            
+            <div id="user-stats" class="tab-content active">
+                <h3>User Statistics</h3>
+                <div id="userStatsContent" class="stats-grid"></div>
+            </div>
+            
+            <div id="daily-tops" class="tab-content">
+                <h3>Daily Top Users</h3>
+                <div id="dailyTopsContent" class="daily-top-list"></div>
+            </div>
+            
+            <div id="summary" class="tab-content">
+                <h3>Processing Summary</h3>
+                <div id="summaryContent"></div>
+            </div>
+            
+            <button id="downloadBtn" class="download-btn">💾 Download Results JSON</button>
+        </div>
+    </div>
+
+    <script>
+        class FitnessDataAggregator {
+            constructor() {
+                this.csvData = null;
+                this.jsonData = null;
+                this.mergedData = null;
+                this.cleanedData = null;
+                this.userStats = null;
+                this.dailyTopUsers = null;
+                this.finalResults = null;
+                
+                this.initializeEventListeners();
+            }
+            
+            initializeEventListeners() {
+                document.getElementById('csvFile').addEventListener('change', (e) => this.handleFileUpload(e, 'csv'));
+                document.getElementById('jsonFile').addEventListener('change', (e) => this.handleFileUpload(e, 'json'));
+                document.getElementById('processBtn').addEventListener('click', () => this.processData());
+                document.getElementById('downloadBtn').addEventListener('click', () => this.downloadResults());
+                
+                // Tab switching
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', () => this.switchTab(tab.dataset.tab));
+                });
+            }
+            
+            handleFileUpload(event, type) {
+                const file = event.target.files[0];
+                const statusElement = document.getElementById(`${type}Status`);
+                
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        if (type === 'csv') {
+                            this.csvData = this.parseCSV(e.target.result);
+                            statusElement.innerHTML = `<div class="success">✅ CSV loaded: ${this.csvData.length} records</div>`;
+                        } else {
+                            this.jsonData = JSON.parse(e.target.result);
+                            statusElement.innerHTML = `<div class="success">✅ JSON loaded: ${this.jsonData.length} records</div>`;
+                        }
+                        this.checkProcessButton();
+                    } catch (error) {
+                        statusElement.innerHTML = `<div class="error">❌ Error loading ${type.toUpperCase()}: ${error.message}</div>`;
+                    }
+                };
+                reader.readAsText(file);
+            }
+            
+            parseCSV(csvText) {
+                const lines = csvText.trim().split('\n');
+                const headers = lines[0].split(',').map(h => h.trim());
+                const data = [];
+                
+                for (let i = 1; i < lines.length; i++) {
+                    const values = lines[i].split(',');
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        let value = values[index]?.trim() || null;
+                        if (value === '' || value === 'null') value = null;
+                        if (value && !isNaN(value) && header !== 'user_id' && header !== 'date') {
+                            value = parseFloat(value);
+                        }
+                        row[header] = value;
+                    });
+                    data.push(row);
+                }
+                return data;
+            }
+            
+            checkProcessButton() {
+                const processBtn = document.getElementById('processBtn');
+                processBtn.disabled = !(this.csvData && this.jsonData);
+            }
+            
+            async processData() {
+                try {
+                    this.showLoading(true);
+                    
+                    // Simulate processing steps with delays for better UX
+                    await this.sleep(500);
+                    
+                    // Step 1: Merge data
+                    this.mergedData = [...this.csvData, ...this.jsonData];
+                    
+                    // Step 2: Clean data
+                    this.cleanedData = this.cleanData(this.mergedData);
+                    
+                    // Step 3: Calculate statistics
+                    this.userStats = this.calculateUserStats(this.cleanedData);
+                    this.dailyTopUsers = this.findDailyTopUsers(this.cleanedData);
+                    
+                    // Step 4: Generate final results
+                    this.finalResults = {
+                        user_stats: this.userStats,
+                        daily_top_user: this.dailyTopUsers
+                    };
+                    
+                    this.showLoading(false);
+                    this.displayResults();
+                    
+                } catch (error) {
+                    this.showLoading(false);
+                    alert(`Processing error: ${error.message}`);
+                }
+            }
+            
+            cleanData(data) {
+                // Normalize dates
+                const normalized = data.map(row => ({
+                    ...row,
+                    date: this.normalizeDate(row.date)
+                }));
+                
+                // Remove duplicates
+                const uniqueData = [];
+                const seen = new Set();
+                
+                for (const row of normalized) {
+                    const key = `${row.user_id}_${row.date}`;
+                    if (!seen.has(key)) {
+                        seen.add(key);
+                        uniqueData.push(row);
+                    }
+                }
+                
+                // Handle missing data
+                return this.handleMissingData(uniqueData);
+            }
+            
+            normalizeDate(dateStr) {
+                if (!dateStr) return dateStr;
+                
+                const formats = [
+                    /^(\d{4})-(\d{2})-(\d{2})$/,  // YYYY-MM-DD
+                    /^(\d{2})\/(\d{2})\/(\d{4})$/, // DD/MM/YYYY
+                    /^(\d{2})-(\d{2})-(\d{4})$/   // DD-MM-YYYY
+                ];
+                
+                let match;
+                if (match = dateStr.match(formats[0])) {
+                    return dateStr; // Already correct format
+                } else if (match = dateStr.match(formats[1])) {
+                    return `${match[3]}-${match[2]}-${match[1]}`;
+                } else if (match = dateStr.match(formats[2])) {
+                    return `${match[3]}-${match[2]}-${match[1]}`;
+                }
+                
+                return dateStr;
+            }
+            
+            handleMissingData(data) {
+                // Calculate user averages for missing data
+                const userAverages = {};
+                
+                // First pass: calculate averages
+                data.forEach(row => {
+                    if (!userAverages[row.user_id]) {
+                        userAverages[row.user_id] = { steps: [], calories: [], sleep_minutes: [] };
+                    }
+                    if (row.steps !== null) userAverages[row.user_id].steps.push(row.steps);
+                    if (row.calories !== null) userAverages[row.user_id].calories.push(row.calories);
+                    if (row.sleep_minutes !== null) userAverages[row.user_id].sleep_minutes.push(row.sleep_minutes);
+                });
+                
+                // Calculate averages
+                Object.keys(userAverages).forEach(userId => {
+                    const avg = userAverages[userId];
+                    avg.steps = avg.steps.length > 0 ? Math.round(avg.steps.reduce((a, b) => a + b) / avg.steps.length) : 0;
+                    avg.calories = avg.calories.length > 0 ? Math.round(avg.calories.reduce((a, b) => a + b) / avg.calories.length) : 0;
+                    avg.sleep_minutes = avg.sleep_minutes.length > 0 ? Math.round(avg.sleep_minutes.reduce((a, b) => a + b) / avg.sleep_minutes.length) : 0;
+                });
+                
+                // Second pass: fill missing values
+                return data.map(row => ({
+                    ...row,
+                    steps: row.steps !== null ? row.steps : userAverages[row.user_id].steps,
+                    calories: row.calories !== null ? row.calories : userAverages[row.user_id].calories,
+                    sleep_minutes: row.sleep_minutes !== null ? row.sleep_minutes : userAverages[row.user_id].sleep_minutes
+                }));
+            }
+            
+            calculateUserStats(data) {
+                const userStats = {};
+                
+                data.forEach(row => {
+                    if (!userStats[row.user_id]) {
+                        userStats[row.user_id] = {
+                            user_id: row.user_id,
+                            total_steps: 0,
+                            total_calories: 0,
+                            weekly_avg_steps: {},
+                            dates: []
+                        };
+                    }
+                    
+                    userStats[row.user_id].total_steps += row.steps || 0;
+                    userStats[row.user_id].total_calories += row.calories || 0;
+                    userStats[row.user_id].dates.push({ date: row.date, steps: row.steps });
+                });
+                
+                // Calculate weekly averages
+                Object.values(userStats).forEach(user => {
+                    const weeklyData = {};
+                    user.dates.forEach(entry => {
+                        const date = new Date(entry.date);
+                        const week = this.getWeekNumber(date);
+                        const weekKey = `${date.getFullYear()}-week-${week}`;
+                        
+                        if (!weeklyData[weekKey]) weeklyData[weekKey] = [];
+                        weeklyData[weekKey].push(entry.steps);
+                    });
+                    
+                    Object.keys(weeklyData).forEach(week => {
+                        const avg = weeklyData[week].reduce((a, b) => a + b) / weeklyData[week].length;
+                        user.weekly_avg_steps[week] = Math.round(avg * 10) / 10;
+                    });
+                    
+                    delete user.dates; // Remove temporary data
+                });
+                
+                return Object.values(userStats);
+            }
+            
+            findDailyTopUsers(data) {
+                const dailyData = {};
+                
+                data.forEach(row => {
+                    if (!dailyData[row.date]) {
+                        dailyData[row.date] = { user_id: row.user_id, steps: row.steps, date: row.date };
+                    } else if (row.steps > dailyData[row.date].steps) {
+                        dailyData[row.date] = { user_id: row.user_id, steps: row.steps, date: row.date };
+                    }
+                });
+                
+                return Object.values(dailyData).sort((a, b) => a.date.localeCompare(b.date));
+            }
+            
+            getWeekNumber(date) {
+                const oneJan = new Date(date.getFullYear(), 0, 1);
+                const numberOfDays = Math.floor((date - oneJan) / (24 * 60 * 60 * 1000));
+                return Math.ceil((date.getDay() + 1 + numberOfDays) / 7);
+            }
+            
+            displayResults() {
+                document.getElementById('resultsSection').style.display = 'block';
+                
+                // Display user stats
+                const userStatsContent = document.getElementById('userStatsContent');
+                userStatsContent.innerHTML = this.userStats.map(user => `
+                    <div class="user-card">
+                        <div class="user-name">👤 ${user.user_id}</div>
+                        <div class="stat-item">
+                            <span>Total Steps:</span>
+                            <strong>${user.total_steps.toLocaleString()}</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span>Total Calories:</span>
+                            <strong>${user.total_calories.toLocaleString()}</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span>Weekly Averages:</span>
+                            <div>${Object.entries(user.weekly_avg_steps).map(([week, avg]) => 
+                                `<small>${week}: ${avg}</small>`
+                            ).join('<br>')}</div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Display daily tops
+                const dailyTopsContent = document.getElementById('dailyTopsContent');
+                dailyTopsContent.innerHTML = this.dailyTopUsers.map(day => `
+                    <div class="top-user-item">
+                        <div>
+                            <span class="date">📅 ${day.date}</span><br>
+                            <span>🏆 ${day.user_id}</span>
+                        </div>
+                        <div class="steps-badge">${day.steps.toLocaleString()} steps</div>
+                    </div>
+                `).join('');
+                
+                // Display summary
+                const summaryContent = document.getElementById('summaryContent');
+                const totalUsers = this.userStats.length;
+                const totalDays = this.dailyTopUsers.length;
+                const totalRecords = this.cleanedData.length;
+                
+                summaryContent.innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                        <div class="user-card">
+                            <h4>📊 Total Records Processed</h4>
+                            <p style="font-size: 2rem; color: #667eea; margin: 10px 0;">${totalRecords}</p>
+                        </div>
+                        <div class="user-card">
+                            <h4>👥 Unique Users</h4>
+                            <p style="font-size: 2rem; color: #28a745; margin: 10px 0;">${totalUsers}</p>
+                        </div>
+                        <div class="user-card">
+                            <h4>📅 Days Analyzed</h4>
+                            <p style="font-size: 2rem; color: #17a2b8; margin: 10px 0;">${totalDays}</p>
+                        </div>
+                    </div>
+                    <div class="user-card" style="margin-top: 20px;">
+                        <h4>🏆 Most Active Users</h4>
+                        ${this.userStats
+                            .sort((a, b) => b.total_steps - a.total_steps)
+                            .slice(0, 5)
+                            .map((user, index) => `
+                                <div class="stat-item">
+                                    <span>${index + 1}. ${user.user_id}</span>
+                                    <strong>${user.total_steps.toLocaleString()} steps</strong>
+                                </div>
+                            `).join('')}
+                    </div>
+                `;
+            }
+            
+            switchTab(tabName) {
+                document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+            }
+            
+            downloadResults() {
+                if (!this.finalResults) return;
+                
+                const dataStr = JSON.stringify(this.finalResults, null, 2);
+                const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                const url = URL.createObjectURL(dataBlob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'fitness_results.json';
+                link.click();
+                
+                URL.revokeObjectURL(url);
+            }
+            
+            showLoading(show) {
+                document.getElementById('loadingSection').style.display = show ? 'block' : 'none';
+                document.getElementById('processBtn').style.display = show ? 'none' : 'block';
+            }
+            
+            sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+        
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', () => {
+            new FitnessDataAggregator();
+        });
+    </script>
+</body>
+</html>
