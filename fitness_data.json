@@ -1,0 +1,282 @@
+[
+  {
+    "date": "2025-09-01",
+    "user_id": "Hannah",
+    "steps": 7500,
+    "calories": 2000,
+    "sleep_minutes": 420
+  },
+  {
+    "date": "01/09/2025",
+    "user_id": "Ian",
+    "steps": 9200,
+    "calories": null,
+    "sleep_minutes": 380
+  },
+  {
+    "date": "2025-09-02",
+    "user_id": "Hannah",
+    "steps": 8100,
+    "calories": 2150,
+    "sleep_minutes": 440
+  },
+  {
+    "date": "02-09-2025",
+    "user_id": "Ian",
+    "steps": 10500,
+    "calories": 2450,
+    "sleep_minutes": 400
+  },
+  {
+    "date": "03/09/2025",
+    "user_id": "Jake",
+    "steps": 6200,
+    "calories": 1850,
+    "sleep_minutes": null
+  },
+  {
+    "date": "2025-09-03",
+    "user_id": "Hannah",
+    "steps": 9800,
+    "calories": 2300,
+    "sleep_minutes": 460
+  },
+  {
+    "date": "03-09-2025",
+    "user_id": "Ian",
+    "steps": 11200,
+    "calories": 2600,
+    "sleep_minutes": 420
+  },
+  {
+    "date": "04/09/2025",
+    "user_id": "Jake",
+    "steps": 7800,
+    "calories": 2050,
+    "sleep_minutes": 380
+  },
+  {
+    "date": "2025-09-04",
+    "user_id": "Hannah",
+    "steps": 8900,
+    "calories": 2180,
+    "sleep_minutes": 440
+  },
+  {
+    "date": "04-09-2025",
+    "user_id": "Ian",
+    "steps": 9700,
+    "calories": 2350,
+    "sleep_minutes": 410
+  },
+  {
+    "date": "05/09/2025",
+    "user_id": "Jake",
+    "steps": 8500,
+    "calories": null,
+    "sleep_minutes": 400
+  },
+  {
+    "date": "2025-09-05",
+    "user_id": "Kate",
+    "steps": 5200,
+    "calories": 1700,
+    "sleep_minutes": 350
+  },
+  {
+    "date": "05-09-2025",
+    "user_id": "Hannah",
+    "steps": 9300,
+    "calories": 2250,
+    "sleep_minutes": 450
+  },
+  {
+    "date": "06/09/2025",
+    "user_id": "Ian",
+    "steps": 10800,
+    "calories": 2500,
+    "sleep_minutes": 430
+  },
+  {
+    "date": "2025-09-06",
+    "user_id": "Jake",
+    "steps": 7400,
+    "calories": 1980,
+    "sleep_minutes": 390
+  },
+  {
+    "date": "06-09-2025",
+    "user_id": "Kate",
+    "steps": 6100,
+    "calories": 1850,
+    "sleep_minutes": 360
+  },
+  {
+    "date": "07/09/2025",
+    "user_id": "Hannah",
+    "steps": 8700,
+    "calories": 2100,
+    "sleep_minutes": 420
+  },
+  {
+    "date": "2025-09-07",
+    "user_id": "Ian",
+    "steps": 11500,
+    "calories": 2650,
+    "sleep_minutes": 450
+  },
+  {
+    "date": "07-09-2025",
+    "user_id": "Jake",
+    "steps": 8200,
+    "calories": 2080,
+    "sleep_minutes": 400
+  },
+  {
+    "date": "08/09/2025",
+    "user_id": "Kate",
+    "steps": 5800,
+    "calories": 1750,
+    "sleep_minutes": 340
+  },
+  {
+    "date": "2025-09-08",
+    "user_id": "Hannah",
+    "steps": 9100,
+    "calories": 2200,
+    "sleep_minutes": 440
+  },
+  {
+    "date": "08-09-2025",
+    "user_id": "Ian",
+    "steps": 10200,
+    "calories": 2400,
+    "sleep_minutes": 410
+  },
+  {
+    "date": "09/09/2025",
+    "user_id": "Jake",
+    "steps": 7900,
+    "calories": 2050,
+    "sleep_minutes": 390
+  },
+  {
+    "date": "2025-09-09",
+    "user_id": "Kate",
+    "steps": 6400,
+    "calories": 1900,
+    "sleep_minutes": 370
+  },
+  {
+    "date": "2025-09-09",
+    "user_id": "Kate",
+    "steps": 6400,
+    "calories": 1900,
+    "sleep_minutes": 370
+  },
+  {
+    "date": "09-09-2025",
+    "user_id": "Hannah",
+    "steps": 8800,
+    "calories": 2150,
+    "sleep_minutes": 430
+  },
+  {
+    "date": "10/09/2025",
+    "user_id": "Ian",
+    "steps": 11800,
+    "calories": 2750,
+    "sleep_minutes": 460
+  },
+  {
+    "date": "2025-09-10",
+    "user_id": "Jake",
+    "steps": 8600,
+    "calories": 2120,
+    "sleep_minutes": 410
+  },
+  {
+    "date": "10-09-2025",
+    "user_id": "Kate",
+    "steps": 6800,
+    "calories": 1950,
+    "sleep_minutes": 380
+  },
+  {
+    "date": "11/09/2025",
+    "user_id": "Hannah",
+    "steps": 9500,
+    "calories": 2300,
+    "sleep_minutes": 450
+  },
+  {
+    "date": "2025-09-11",
+    "user_id": "Ian",
+    "steps": 12200,
+    "calories": 2800,
+    "sleep_minutes": 470
+  },
+  {
+    "date": "11-09-2025",
+    "user_id": "Jake",
+    "steps": 8900,
+    "calories": 2200,
+    "sleep_minutes": 420
+  },
+  {
+    "date": "12/09/2025",
+    "user_id": "Kate",
+    "steps": 7100,
+    "calories": null,
+    "sleep_minutes": 390
+  },
+  {
+    "date": "2025-09-12",
+    "user_id": "Hannah",
+    "steps": 8800,
+    "calories": 2150,
+    "sleep_minutes": 440
+  },
+  {
+    "date": "12-09-2025",
+    "user_id": "Ian",
+    "steps": 10900,
+    "calories": 2550,
+    "sleep_minutes": 450
+  },
+  {
+    "date": "13/09/2025",
+    "user_id": "Jake",
+    "steps": 8400,
+    "calories": 2100,
+    "sleep_minutes": 410
+  },
+  {
+    "date": "2025-09-13",
+    "user_id": "Kate",
+    "steps": 6600,
+    "calories": 1900,
+    "sleep_minutes": 370
+  },
+  {
+    "date": "13-09-2025",
+    "user_id": "Hannah",
+    "steps": 9200,
+    "calories": 2250,
+    "sleep_minutes": 460
+  },
+  {
+    "date": "14/09/2025",
+    "user_id": "Ian",
+    "steps": 11600,
+    "calories": 2700,
+    "sleep_minutes": 480
+  },
+  {
+    "date": "2025-09-14",
+    "user_id": "Jake",
+    "steps": 8700,
+    "calories": 2150,
+    "sleep_minutes": 430
+  }
+]

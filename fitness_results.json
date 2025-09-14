@@ -1,0 +1,206 @@
+{
+  "user_stats": [
+    {
+      "user_id": "Alice",
+      "total_steps": 88200,
+      "total_calories": 21340,
+      "weekly_avg_steps": {
+        "2025-week-35": 8583.3,
+        "2025-week-36": 9175.0
+      }
+    },
+    {
+      "user_id": "Bob",
+      "total_steps": 99300,
+      "total_calories": 23100,
+      "weekly_avg_steps": {
+        "2025-week-35": 10600.0,
+        "2025-week-36": 11575.0
+      }
+    },
+    {
+      "user_id": "Charlie",
+      "total_steps": 44300,
+      "total_calories": 12192,
+      "weekly_avg_steps": {
+        "2025-week-35": 7150.0,
+        "2025-week-36": 7500.0
+      }
+    },
+    {
+      "user_id": "David",
+      "total_steps": 45800,
+      "total_calories": 12300,
+      "weekly_avg_steps": {
+        "2025-week-35": 6000.0,
+        "2025-week-36": 8450.0
+      }
+    },
+    {
+      "user_id": "Eve",
+      "total_steps": 29800,
+      "total_calories": 9050,
+      "weekly_avg_steps": {
+        "2025-week-35": 4500.0,
+        "2025-week-36": 6166.7,
+        "2025-week-37": 6800.0
+      }
+    },
+    {
+      "user_id": "Frank",
+      "total_steps": 26100,
+      "total_calories": 6225,
+      "weekly_avg_steps": {
+        "2025-week-36": 8950.0,
+        "2025-week-37": 8200.0
+      }
+    },
+    {
+      "user_id": "Grace",
+      "total_steps": 10300,
+      "total_calories": 3300,
+      "weekly_avg_steps": {
+        "2025-week-36": 5500.0,
+        "2025-week-37": 4800.0
+      }
+    },
+    {
+      "user_id": "Hannah",
+      "total_steps": 97700,
+      "total_calories": 24030,
+      "weekly_avg_steps": {
+        "2025-week-35": 8720.0,
+        "2025-week-36": 9016.7
+      }
+    },
+    {
+      "user_id": "Henry",
+      "total_steps": 42900,
+      "total_calories": 10750,
+      "weekly_avg_steps": {
+        "2025-week-35": 8150.0,
+        "2025-week-36": 8866.7
+      }
+    },
+    {
+      "user_id": "Ian",
+      "total_steps": 119600,
+      "total_calories": 28325,
+      "weekly_avg_steps": {
+        "2025-week-35": 10280.0,
+        "2025-week-36": 11320.0,
+        "2025-week-37": 11600.0
+      }
+    },
+    {
+      "user_id": "Iris",
+      "total_steps": 34500,
+      "total_calories": 9600,
+      "weekly_avg_steps": {
+        "2025-week-35": 6800.0,
+        "2025-week-36": 7050.0,
+        "2025-week-37": 6800.0
+      }
+    },
+    {
+      "user_id": "Jack",
+      "total_steps": 42300,
+      "total_calories": 10100,
+      "weekly_avg_steps": {
+        "2025-week-35": 10000.0,
+        "2025-week-36": 11150.0
+      }
+    },
+    {
+      "user_id": "Jake",
+      "total_steps": 80600,
+      "total_calories": 20644,
+      "weekly_avg_steps": {
+        "2025-week-35": 7475.0,
+        "2025-week-36": 8400.0,
+        "2025-week-37": 8700.0
+      }
+    },
+    {
+      "user_id": "Kate",
+      "total_steps": 44000,
+      "total_calories": 12892,
+      "weekly_avg_steps": {
+        "2025-week-35": 5650.0,
+        "2025-week-36": 6540.0
+      }
+    }
+  ],
+  "daily_top_user": [
+    {
+      "date": "2025-09-01",
+      "user_id": "Bob",
+      "steps": 12000
+    },
+    {
+      "date": "2025-09-02",
+      "user_id": "Ian",
+      "steps": 10500
+    },
+    {
+      "date": "2025-09-03",
+      "user_id": "Bob",
+      "steps": 11500
+    },
+    {
+      "date": "2025-09-04",
+      "user_id": "Bob",
+      "steps": 10200
+    },
+    {
+      "date": "2025-09-05",
+      "user_id": "Jack",
+      "steps": 9800
+    },
+    {
+      "date": "2025-09-06",
+      "user_id": "Ian",
+      "steps": 10800
+    },
+    {
+      "date": "2025-09-07",
+      "user_id": "Ian",
+      "steps": 11500
+    },
+    {
+      "date": "2025-09-08",
+      "user_id": "Bob",
+      "steps": 11200
+    },
+    {
+      "date": "2025-09-09",
+      "user_id": "Jack",
+      "steps": 11500
+    },
+    {
+      "date": "2025-09-10",
+      "user_id": "Bob",
+      "steps": 12500
+    },
+    {
+      "date": "2025-09-11",
+      "user_id": "Ian",
+      "steps": 12200
+    },
+    {
+      "date": "2025-09-12",
+      "user_id": "Ian",
+      "steps": 10900
+    },
+    {
+      "date": "2025-09-13",
+      "user_id": "Bob",
+      "steps": 11800
+    },
+    {
+      "date": "2025-09-14",
+      "user_id": "Ian",
+      "steps": 11600
+    }
+  ]
+}
